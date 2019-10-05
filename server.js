@@ -10,13 +10,7 @@ app.use(cors());
 
 if (process.env.JAWSDB_URL) {
   console.log("======jasws firing");
-  var connection = mysql.createConnection({
-    host: "jsk3f4rbvp8ayd7w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    port: 3306,
-    user: "pvinvxba7uoofdcp",
-    password: "h2w2lzrdfijgirrx",
-    database: "gjfc2hs22w39myr4"
-  });
+  var connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
   console.log("=====nope ===");
   var connection = mysql.createConnection({

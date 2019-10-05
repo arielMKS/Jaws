@@ -18,7 +18,7 @@ if (process.env.JAWSDB_URL) {
     port: 3306,
     user: "root",
     password: "My_mysql1",
-    database: "db1"
+    database: "db2"
   });
 }
 

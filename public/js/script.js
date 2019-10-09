@@ -42,7 +42,7 @@ li.forEach(liItem => {
     // fetch("http://localhost:5000/car/" + id, {
     // for localhost
     // for heroku
-    fetch(url + "/car" + id, {
+    fetch(url + "/car/" + id, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data: "Sending data to server" })

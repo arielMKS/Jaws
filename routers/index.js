@@ -3,7 +3,6 @@ const router = express.Router();
 const mysql = require("mysql");
 
 if (process.env.JAWSDB_URL) {
-  // var env = process.env.NODE_ENV || "development";
   var connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
   var connection = mysql.createConnection({
@@ -21,7 +20,7 @@ connection.connect(function(err) {
   console.log("Connected to the MySQL server");
 });
 
-// endpoint to inform client if app is on production or development mode
+// endpoint to tell client if app is in production mode. This endpoint is called by an IIFE on the client side
 router.get("/mode", function(req, res) {
   if (process.env.JAWSDB_URL) {
     console.log("We are on Production mode...");
@@ -29,7 +28,7 @@ router.get("/mode", function(req, res) {
   }
 });
 
-// DELETE HERE
+// DELETE
 router.delete("/car/:Id", function(req, res) {
   const id = req.params.Id;
 
@@ -44,7 +43,7 @@ router.delete("/car/:Id", function(req, res) {
   // res.redirect("/"); // not going to home page as desired
 });
 
-// CREATE (POST)
+// CREATE
 router.post("/car", function(req, res) {
   let currentCount;
   let post;
@@ -68,7 +67,7 @@ router.post("/car", function(req, res) {
 
   insertNewRecord()
     .then(res => {
-      currentCount = res[0] ? res[0].Id : 0; // set to 0 if table is empty otherwise error
+      currentCount = res[0] ? res[0].Id : 0; // set to 0 if table is empty to handle error
       post = { Id: currentCount + 1, Make: make }; // create new record
 
       connection.query("INSERT INTO Cars SET ?", post, function(
@@ -83,9 +82,7 @@ router.post("/car", function(req, res) {
   res.redirect("/"); // go back to home page
 });
 
-// var ENV = process.env.NODE_ENV || "development";
-
-// READ ALL (GET)
+// READ ALL
 router.get("/", function(req, res) {
   console.log("This is the Home page");
   connection.query("SELECT * FROM Cars", function(error, results, fields) {
@@ -93,7 +90,5 @@ router.get("/", function(req, res) {
     res.render("index", { data: results });
   });
 });
-
-// connection.end();
 
 module.exports = router;

@@ -7,7 +7,7 @@ let input = document.querySelector("input");
 let btn = document.querySelector("input[type='submit'");
 let url = "http://localhost:5000";
 
-// IIFE to ask server if app is on production or development mode
+// IIFE to ask server if app is on production mode.
 (function() {
   fetch("/mode", {
     method: "GET"
@@ -16,9 +16,7 @@ let url = "http://localhost:5000";
       return response.json();
     })
     .then(response => {
-      // console.log("What mode:", response);
-      // productionMode = response;
-      url = "";
+      url = ""; // reset url if in production mode
     })
     .catch(err => console.log("Error in /mode"));
 })();
@@ -30,15 +28,10 @@ li.forEach(liItem => {
 
   // add event listener to button
   btn.addEventListener("click", evt => {
-    // ul.removeChild(evt.target.parentNode);
     let parent = evt.target.parentNode;
+    let id = parent.firstChild.innerHTML; // get reference to <span>[id]</span>
 
-    let id = parent.firstChild.innerHTML;
-    // console.log(id);
-
-    // fetch("http://localhost:5000/car/" + id, {
-    // for localhost
-    // for heroku
+    // url will be set appropriately both for development and production modes
     fetch(url + "/car/" + id, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },

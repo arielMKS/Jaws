@@ -3,6 +3,7 @@ const router = express.Router();
 const mysql = require("mysql");
 
 if (process.env.JAWSDB_URL) {
+  // var env = process.env.NODE_ENV || "development";
   var connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
   var connection = mysql.createConnection({
@@ -18,6 +19,14 @@ if (process.env.JAWSDB_URL) {
 connection.connect(function(err) {
   if (err) throw err;
   console.log("Connected to the MySQL server");
+});
+
+// endpoint to inform client if app is on production or development mode
+router.get("/mode", function(req, res) {
+  if (process.env.JAWSDB_URL) {
+    console.log("We are on Production mode...");
+    res.json("production");
+  }
 });
 
 // DELETE HERE

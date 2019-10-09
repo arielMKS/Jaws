@@ -83,12 +83,14 @@ router.post("/car", function(req, res) {
   res.redirect("/"); // go back to home page
 });
 
+var ENV = process.env.NODE_ENV || "development";
+
 // READ ALL (GET)
 router.get("/", function(req, res) {
   console.log("This is the Home page");
   connection.query("SELECT * FROM Cars", function(error, results, fields) {
     if (error) throw error;
-    res.render("index", { data: results });
+    res.render("index", { data: results, env: ENV });
   });
 });
 

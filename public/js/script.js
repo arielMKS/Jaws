@@ -6,25 +6,22 @@ let li = document.querySelectorAll("li");
 let input = document.querySelector("input");
 let btn = document.querySelector("input[type='submit'");
 let url = "http://localhost:5000";
-var productionMode = "";
 
 // IIFE to ask server if app is on production or development mode
-// (function() {
-//   fetch("http://localhost:5000/mode", {
-//     method: "GET"
-//   })
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(response => {
-//       console.log("what mode:", response);
-//       productionMode = response;
-//     });
-// })();
-
-if (productionMode) {
-  url = "";
-}
+(function() {
+  fetch("/mode", {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(response => {
+      // console.log("What mode:", response);
+      // productionMode = response;
+      url = "";
+    })
+    .catch(err => console.log("Error in /mode"));
+})();
 
 // create a button
 li.forEach(liItem => {

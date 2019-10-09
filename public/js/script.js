@@ -20,7 +20,9 @@ li.forEach(liItem => {
     let id = parent.firstChild.innerHTML;
     console.log(id);
 
-    fetch("http://localhost:5000/car/" + id, {
+    // ariel-app1.herokuapp.com
+    // fetch("http://localhost:5000/car/" + id, {
+    fetch("ariel-app1.herokuapp.com/car/" + id, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data: "Sending data to server" })

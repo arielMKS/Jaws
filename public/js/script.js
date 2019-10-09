@@ -22,7 +22,7 @@ li.forEach(liItem => {
 
     // ariel-app1.herokuapp.com
     // fetch("http://localhost:5000/car/" + id, {
-    fetch("ariel-app1.herokuapp.com/car/" + id, {
+    fetch("car/" + id, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data: "Sending data to server" })
